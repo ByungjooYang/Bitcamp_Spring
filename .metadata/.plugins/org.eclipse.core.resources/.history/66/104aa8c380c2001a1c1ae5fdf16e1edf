@@ -1,0 +1,26 @@
+package sample03;
+
+public class SungJukImpl implements SungJuk {
+	SungJukDTO dto = new SungJukDTO();
+
+	@Override
+	public void calcTot() {
+		dto.setTot(dto.getKor() + dto.getEng() + dto.getMath());
+	}
+
+	@Override
+	public void calcAvg() {
+		dto.setAvg((double)dto.getTot()/3);
+	}
+
+	@Override
+	public void display() {
+		System.out.println("이름\t국어\t영어\t수학\t총점\t평균");
+		
+	}
+
+	@Override
+	public void modify() {
+	}
+
+}

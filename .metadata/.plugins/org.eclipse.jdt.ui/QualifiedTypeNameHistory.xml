@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="sample01.MessageBean"/>
+<fullyQualifiedTypeName name="lombok.Setter"/>
+<fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
+<fullyQualifiedTypeName name="lombok.NonNull"/>
+<fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+<fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
+</qualifiedTypeNameHistroy>

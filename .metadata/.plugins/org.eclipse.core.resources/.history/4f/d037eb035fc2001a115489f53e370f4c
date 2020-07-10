@@ -1,0 +1,23 @@
+package sample01;
+
+public class MessageBeanImpl implements MessageBean {
+
+	@Override
+	public void sayHello() {
+		
+		
+	}
+
+	@Override
+	public void sayHello(String fruit, int cost) {
+		
+		
+	}
+
+	@Override
+	public void sayHello(String fruit, int cons, int qty) {
+		
+		
+	}
+
+}

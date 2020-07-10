@@ -1,0 +1,13 @@
+package sample05;
+
+import java.util.Scanner;
+
+public class SungJukInput implements SungJuk {
+
+	@Override
+	public void execute() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("이름 입력");
+	}
+
+}

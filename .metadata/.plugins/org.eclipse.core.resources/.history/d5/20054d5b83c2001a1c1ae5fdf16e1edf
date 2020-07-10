@@ -1,0 +1,23 @@
+package sample03;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import lombok.Data;
+
+@Data
+public class SungJukDTO {
+	public SungJukDTO() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		SungJukDTO dto = context.getBean("sungJukImpl", SungJukDTO.class);
+	}
+	
+	private String name;
+	private int kor;
+	private int eng;
+	private int math;
+	private int tot;
+	private double avg;
+	
+	
+}

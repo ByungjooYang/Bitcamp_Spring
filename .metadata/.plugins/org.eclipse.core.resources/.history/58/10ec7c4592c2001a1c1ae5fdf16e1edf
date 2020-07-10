@@ -1,0 +1,9 @@
+package sample05;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public interface SungJuk {
+	List<SungJukDTO2> list = new ArrayList<SungJukDTO2>();
+	public void execute();
+}

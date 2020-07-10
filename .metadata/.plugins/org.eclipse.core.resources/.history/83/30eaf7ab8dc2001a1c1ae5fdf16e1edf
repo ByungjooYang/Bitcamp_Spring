@@ -1,0 +1,26 @@
+package sample05;
+
+import java.util.Scanner;
+
+public class HelloSpring {
+	public void menu() {
+		Scanner scanner = new Scanner(System.in);
+		int choice;
+		while(true) {
+			System.out.println("======================");
+			System.out.println("	1. 입력");
+			System.out.println("	2. 츨력");
+			System.out.println("	3. 수정");
+			System.out.println("	4. 삭제");
+			System.out.println("	5. 끝");
+			System.out.println("======================");
+			System.out.print("번호를 입력해주세요 : ");
+			
+			
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+	}
+}

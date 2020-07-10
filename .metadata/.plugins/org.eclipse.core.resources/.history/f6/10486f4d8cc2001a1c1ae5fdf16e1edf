@@ -1,0 +1,10 @@
+package sample05;
+
+public class SungJukDTO2 {
+	private String name2;
+	private int kor2;
+	private int eng2;
+	private int math2;
+	private int tot2;
+	private double avg2;
+}

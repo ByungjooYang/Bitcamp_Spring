@@ -1,0 +1,25 @@
+package sample03;
+
+public class SungJukImpl implements SungJuk {
+
+	@Override
+	public void calcTot() {
+		
+		
+	}
+
+	@Override
+	public void calcAvg() {
+	}
+
+	@Override
+	public void display() {
+		System.out.println("이름\t국어\t영어\t수학\t총점\t평균");
+		
+	}
+
+	@Override
+	public void modify() {
+	}
+
+}
