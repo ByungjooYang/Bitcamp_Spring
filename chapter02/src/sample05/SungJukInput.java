@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SungJukInput implements SungJuk {
-	List<SungJukDTO2> list;
+	private HelloSpring helloSpring;
 	
-	public SungJukInput(List<SungJukDTO2> list) {
-		this.list = list;
+	public SungJukInput(HelloSpring helloSpring) {
+		this.helloSpring = helloSpring;
 	}
 	
 	@Override
@@ -24,10 +24,9 @@ public class SungJukInput implements SungJuk {
 		sungJukDTO2.setMath2(scanner.nextInt());
 		
 		sungJukDTO2.setTot2(sungJukDTO2.getKor2() + sungJukDTO2.getEng2() + sungJukDTO2.getMath2());
-		sungJukDTO2.setAvg2(sungJukDTO2.getAvg2()/3.0);
+		sungJukDTO2.setAvg2(Double.parseDouble(String.format(".2f", sungJukDTO2.getTot2()/3.0)));
 		
-		list.add(sungJukDTO2);
-		System.out.println(list.size());
+		helloSpring.getList().add(sungJukDTO2);
 	}
 
 }

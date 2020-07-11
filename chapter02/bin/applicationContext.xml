@@ -59,21 +59,26 @@
 	<bean id="sungJukDTO2" class="sample05.SungJukDTO2"></bean>
 	
 	<bean id="sungJukInput" class="sample05.SungJukInput">
-		<constructor-arg ref="sungJukDTO2"/>
+		<constructor-arg ref="helloSpring"/>
 	</bean>
 	
 	<bean id="sungJukOutput" class="sample05.SungJukOutput">
-		<constructor-arg ref="sungJukDTO2"/>
+		<constructor-arg ref="helloSpring"/>
 	</bean>
 	
 	<bean id="sungJukModify" class="sample05.SungJukModify">
-		<constructor-arg ref="sungJukDTO2"/>
+		<constructor-arg ref="helloSpring"></constructor-arg>
 	</bean>
 	
 	<bean id="sungJukDelete" class="sample05.SungJukDelete">
-		<constructor-arg ref="sungJukDTO2"/>
+		<constructor-arg ref="helloSpring"/>
 	</bean>
 	
-	<bean id="helloSpring" class="sample05.HelloSpring"></bean>
+	<bean id="helloSpring" class="sample05.HelloSpring">
+		<property name="list">
+			<list value-type="sungJukDTO2"></list>
+		</property>
+	</bean>
 	
+		
 </beans>
