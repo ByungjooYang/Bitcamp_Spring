@@ -9,17 +9,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class HelloSpring {
 	private List<SungJukDTO2> list = new ArrayList<SungJukDTO2>();
+	private Scanner scanner;
 	
-	public void setList(List<SungJukDTO2> list) {
-		this.list = list;
-	}
+	public void setList(List<SungJukDTO2> list) { this.list = list; }
+	public List<SungJukDTO2> getList(){	return list; }
+	public void setScanner(Scanner scanner) { this.scanner = scanner; }
+	public Scanner getScanner() { return scanner; }
 	
-	public List<SungJukDTO2> getList(){
-		return list;
-	}
 	
 	public void menu(ApplicationContext context) {
-		Scanner scanner = new Scanner(System.in);
+		scanner = new Scanner(System.in);
 		int choice;
 		while(true) {
 			System.out.println("======================");
@@ -32,7 +31,10 @@ public class HelloSpring {
 			System.out.print("번호를 입력해주세요 : ");
 			choice = scanner.nextInt();
 			
-			if(choice==5) return;
+			if(choice==5) {
+				scanner.close();
+				break;
+			}
 			
 			if(choice==1) {
 				context.getBean("sungJukInput", SungJuk.class).execute();

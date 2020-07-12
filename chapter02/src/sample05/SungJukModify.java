@@ -9,9 +9,10 @@ public class SungJukModify implements SungJuk {
 	public SungJukModify(HelloSpring helloSpring) {
 		this.helloSpring = helloSpring;
 	}
+	
 	@Override
 	public void execute() {
-		Scanner scanner = new Scanner(System.in);
+		Scanner scanner = helloSpring.getScanner();
 		System.out.print("수정할 이름 입력 : ");
 		String searchName = scanner.next();
 		int count = 0;
@@ -28,7 +29,7 @@ public class SungJukModify implements SungJuk {
 				sungJukDTO2.setMath2(scanner.nextInt());
 				
 				sungJukDTO2.setTot2(sungJukDTO2.getKor2() + sungJukDTO2.getEng2() + sungJukDTO2.getMath2());
-				sungJukDTO2.setAvg2(Double.parseDouble(String.format(".2f", sungJukDTO2.getTot2()/3.0)));
+				sungJukDTO2.setAvg2(Double.parseDouble(String.format("%.2f", sungJukDTO2.getTot2()/3.0)));
 				
 				System.out.println("수정되었습니다.");
 				count++;

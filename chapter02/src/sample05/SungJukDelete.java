@@ -12,7 +12,7 @@ public class SungJukDelete implements SungJuk {
 	}
 	@Override
 	public void execute() {
-		Scanner scanner = new Scanner(System.in);
+		Scanner scanner = helloSpring.getScanner();
 		System.out.print("삭제할 이름 입력 : ");
 		String deleteName = scanner.next();
 		int count = 0;
@@ -26,6 +26,17 @@ public class SungJukDelete implements SungJuk {
 			}
 		}*/
 		
+		
+		/*
+		Iterator<SungJukDTO2> iter = helloSpring.getLst().iterator();
+		
+		while(iter.hasNext()){
+			if(sunJukDTO2.getName2().equals(deleteName)){
+				iter.remove()
+				count++;
+			}
+		}
+		 */
 		for(Iterator<SungJukDTO2> iter = helloSpring.getList().iterator(); iter.hasNext();) {
 			SungJukDTO2 sungJukDTO2 = iter.next();
 			
@@ -37,7 +48,7 @@ public class SungJukDelete implements SungJuk {
 		
 		if(count == 0) System.out.println("찾는 이름이 없습니다.");
 		
-		
 	}
+	
 
 }

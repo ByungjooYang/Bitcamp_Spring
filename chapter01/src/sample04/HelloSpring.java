@@ -19,7 +19,7 @@ public class HelloSpring {
 		calcAdd.calculate(x, y);
 		calcMul.calculate(x, y);
 		
-		((AbstractApplicationContext) context).close();
+		((AbstractApplicationContext)context).close();
 	}
 
 }

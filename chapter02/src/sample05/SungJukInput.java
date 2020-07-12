@@ -12,7 +12,7 @@ public class SungJukInput implements SungJuk {
 	
 	@Override
 	public void execute() {
-		Scanner scanner = new Scanner(System.in);
+		Scanner scanner = helloSpring.getScanner();
 		SungJukDTO2 sungJukDTO2 = new SungJukDTO2();
 		System.out.print("이름 입력 : ");
 		sungJukDTO2.setName2(scanner.next());
@@ -24,7 +24,7 @@ public class SungJukInput implements SungJuk {
 		sungJukDTO2.setMath2(scanner.nextInt());
 		
 		sungJukDTO2.setTot2(sungJukDTO2.getKor2() + sungJukDTO2.getEng2() + sungJukDTO2.getMath2());
-		sungJukDTO2.setAvg2(Double.parseDouble(String.format(".2f", sungJukDTO2.getTot2()/3.0)));
+		sungJukDTO2.setAvg2(Double.parseDouble(String.format("%.2f", sungJukDTO2.getTot2()/3.0)));
 		
 		helloSpring.getList().add(sungJukDTO2);
 	}
