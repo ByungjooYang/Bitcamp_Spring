@@ -18,9 +18,10 @@ public class HelloSpring {
 	
 	
 	public void menu(ApplicationContext context) {
-		scanner = new Scanner(System.in);
-		int choice;
+		String choice;
+		//scanner = new Scanner(System.in);
 		while(true) {
+			System.out.println();
 			System.out.println("======================");
 			System.out.println("	1. 입력");
 			System.out.println("	2. 츨력");
@@ -29,26 +30,24 @@ public class HelloSpring {
 			System.out.println("	5. 끝");
 			System.out.println("======================");
 			System.out.print("번호를 입력해주세요 : ");
-			choice = scanner.nextInt();
+			choice = scanner.next(); // nextInt로 받을시 숫자 외의 문자가 들어오면 에러가 떠서 문자열로 받은 후 비교함.
 			
-			if(choice==5) {
-				scanner.close();
-				break;
-			}
+			if(choice.equals("5")) break;
 			
-			if(choice==1) {
+			if(choice.equals("1")) {
 				context.getBean("sungJukInput", SungJuk.class).execute();
 				
-			}else if(choice==2) {
+			}else if(choice.equals("2")) {
 				context.getBean("sungJukOutput", SungJuk.class).execute();
 				
-			}else if(choice==3) {
+			}else if(choice.equals("3")) {
 				context.getBean("sungJukModify", SungJuk.class).execute();
 				
-			}else if(choice==4) {
+			}else if(choice.equals("4")) {
 				context.getBean("sungJukDelete", SungJuk.class).execute();
 				
 			}else {
+				System.out.println();
 				System.out.println("1~5사이의 숫자를 입력해주세요.");
 			}
 			
@@ -58,6 +57,8 @@ public class HelloSpring {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		HelloSpring helloSpring = context.getBean("helloSpring", HelloSpring.class);	
+		helloSpring.scanner = new Scanner(System.in); //while문 안에 new Scanner 하면 while 문 돌때마다 메모리에 객체가 생성되므로 하나만 생성해서 계속 쓰도록 만듬.
 		helloSpring.menu(context);
+		helloSpring.scanner.close();
 	}
 }
