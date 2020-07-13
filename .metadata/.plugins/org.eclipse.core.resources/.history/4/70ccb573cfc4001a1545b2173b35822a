@@ -1,0 +1,57 @@
+package sample05;
+
+import java.util.Scanner;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")
+public class SungJukInput implements SungJuk {
+	@Autowired
+	private SungJukDTO2 sungJukDTO2;
+	private HelloSpring helloSpring;
+	/*
+	list가 부모이므로 여러개의 클래스가 생성될 수 있따.
+	그러므로 반드시 @Qualifier를 사용해서 Bean id를 등록해야 한다.
+	@Qualifier("list") 
+	private List<SungJukDTO2> list;
+	*/
+	@Autowired
+	
+	
+	public SungJukInput(HelloSpring helloSpring) {
+		this.helloSpring = helloSpring;
+	}
+	
+	
+	/*public SungJukInput(HelloSpring helloSpring) {
+		this.helloSpring = helloSpring;
+	}*/
+	
+	/*public void setSungJukDTO2(SungJukDTO2 sungJukDTO2) {
+		this.sungJukDTO2 = sungJukDTO2;
+	}*/
+	
+	@Override
+	public void execute() {
+		Scanner scanner = helloSpring.getScanner();
+		//ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//sungJukDTO2 = context.getBean("sungJukDTO2", SungJukDTO2.class);
+		System.out.print("이름 입력 : ");
+		sungJukDTO2.setName2(scanner.next());
+		System.out.print("국어 입력 : ");
+		sungJukDTO2.setKor2(scanner.nextInt());
+		System.out.print("영어 입력 : ");
+		sungJukDTO2.setEng2(scanner.nextInt());
+		System.out.print("수학 입력 : ");
+		sungJukDTO2.setMath2(scanner.nextInt());
+		
+		sungJukDTO2.calcTot2();
+		sungJukDTO2.calcAvg2();
+		
+		helloSpring.getList().add(sungJukDTO2);
+	}
+
+}

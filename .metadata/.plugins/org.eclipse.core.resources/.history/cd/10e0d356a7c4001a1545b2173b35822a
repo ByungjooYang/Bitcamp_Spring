@@ -1,0 +1,16 @@
+package spring.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import sample03.SungJukImpl;
+
+@Configuration
+public class SpringConfiguration { //new bean 설정.
+	//메소드명을 객체명으로 인식한다. SungJukImpl getSungJukImpl = new SungJukImpl();
+	@Bean
+	public SungJukImpl getSungJukImpl() {
+		
+		return new SungJukImpl();
+	}
+}

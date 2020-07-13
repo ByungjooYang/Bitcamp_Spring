@@ -54,12 +54,34 @@
 		<constructor-arg ref="sungJukDTO"/>
 	</bean>
 	
+	
+	<!-- sample04 -->
+	
+	<bean id="messageBeanImpl2" class="sample04.MessageBeanImpl">
+		<constructor-arg name="name" value="홍길동"/>
+		<property name="phone" value="010-1234-1234"/>
+		<property name="outputter" ref="fileOutputter" />
+	</bean>
+	
+	<bean id="fileOutputter" class="sample04.FileOutputter">
+		<property name="filePath" value="C:/Users/Yang/Desktop/source/"/>
+		<property name="fileName" value="result.txt"/>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- sample05 -->
 	
-	<bean id="sungJukDTO2" class="sample05.SungJukDTO2"></bean>
+	<bean id="sungJukDTO2" class="sample05.SungJukDTO2" scope="prototype"></bean>
 	
-	<bean id="sungJukInput" class="sample05.SungJukInput">
+	<bean id="sungJukInput" class="sample05.SungJukInput" scope="prototype">
 		<constructor-arg ref="helloSpring"/>
+		<property name="sungJukDTO2" ref="sungJukDTO2"/> <!-- => new SungJukDTO2() -->
 	</bean>
 	
 	<bean id="sungJukOutput" class="sample05.SungJukOutput">
@@ -67,7 +89,7 @@
 	</bean>
 	
 	<bean id="sungJukModify" class="sample05.SungJukModify">
-		<constructor-arg ref="helloSpring"></constructor-arg>
+		<constructor-arg ref="helloSpring"/>
 	</bean>
 	
 	<bean id="sungJukDelete" class="sample05.SungJukDelete">
@@ -80,5 +102,8 @@
 		</property>
 	</bean>
 	
-		
+	<!-- <bean id="list" class="java.util.ArrayList"></bean> 
+		이렇게 만들면 
+		<property name="list" ref="list"/> 를 추가해주면 된다.
+	-->
 </beans>
