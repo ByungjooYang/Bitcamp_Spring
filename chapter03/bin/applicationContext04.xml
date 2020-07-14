@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<bean id="messageBeanImpl" class="sample04_advisor.MessageBeanImpl"></bean> <!-- 핵심 -->
+	
+	<bean id="loggingBeforeAdvice" class="sample04_advisor.LoggingBeforeAdvice"></bean> <!--  공통 -->
+	<bean id="loggingAfterAdvice" class="sample04_advisor.LoggingAfterAdvice"></bean>
+	
+	
+	<!-- <bean id="methodPointCut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedName" value="study"></property> messageBeanImpl에서 study만 before로 삽입해라 라는 뜻
+	</bean>
+	
+	
+	<bean id="beforeAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="loggingBeforeAdvice"></property>
+		<property name="pointcut" ref="methodPointCut"></property>
+	</bean>
+	
+	
+	<bean id="afterAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="loggingAfterAdvice"></property>
+		<property name="pointcut" ref="methodPointCut"></property>
+	</bean>
+	 -->
+	 
+	 <bean id="beforeAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+	 	<property name="advice" ref="loggingBeforeAdvice"></property>
+	 	<property name="mappedNames">
+	 		<list>
+	 			<value>study</value>
+	 			<value>lesson</value>
+	 		</list>
+	 	</property>
+	 </bean>
+	 
+	 <bean id="afterAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+	 	<property name="advice" ref="loggingAfterAdvice"></property>
+	 	<property name="mappedNames">
+	 		<list>
+	 			<value>study</value>
+	 			<value>lesson</value>
+	 		</list>
+	 	</property>
+	 </bean>
+	
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="messageBeanImpl"/> <!-- 프록시에게 핵심임을 알려줌 -->
+		<property name="interceptorNames">
+			<list>
+				<value>beforeAdvisor</value>	<!-- before인지 after인지 기술해준다.(공통 코드를 집어 넣음) -->
+				<value>afterAdvisor</value>
+				<!-- <value>loggingAfterAdvice</value> -->
+			</list>
+		</property>
+	</bean>
+</beans>

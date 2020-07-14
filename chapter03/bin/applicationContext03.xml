@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="messageBeanImpl" class="sample03_PointCut.MessageBeanImpl"></bean> <!-- 핵심 클래스 -->
+	
+	<bean id="loggingBeforeAdvice" class="sample03_PointCut.LoggingBeforeAdvice"></bean> <!-- 공통 -->
+	<bean id="loggingAfterAdvice" class="sample03_PointCut.LoggingAfterAdvice"></bean> 
+	<bean id="loggingAroundAdvice" class="sample03_PointCut.LoggingAroundAdvice"></bean>
+	
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean"> <!-- 프록시(대리인)가 대신 주입해준다. -->
+		<property name="target" ref="messageBeanImpl"/> <!-- 프록시에게 핵심임을 알려줌 -->
+		<property name="interceptorNames">
+			<list>
+				<value>loggingBeforeAdvice</value>	<!-- before인지 after인지 기술해준다.(공통 코드를 집어 넣음) -->
+				<value>loggingAfterAdvice</value>
+				<value>loggingAroundAdvice</value>
+				<!-- <value>beforeAdvisor</value> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- <bean id="methodPointCut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedName" value="study"></property>
+	</bean>
+	
+	<bean id="beforeAdvisor" class="org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor">
+		<property name="advice" ref="loggingBeforeAdvice"></property>
+		<property name="pointcut" ref="methodPointCut"></property>
+	</bean> -->
+</beans>
