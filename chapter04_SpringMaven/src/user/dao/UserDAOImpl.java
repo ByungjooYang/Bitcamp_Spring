@@ -30,7 +30,7 @@ import user.bean.UserDTO;
  * 
  * }
  */
-
+ 
 //public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
 @Repository //component라고 해도 되나 db와 연결된다는 것을 명시적으로 표현하기 위해 쓴다.
 public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO{
