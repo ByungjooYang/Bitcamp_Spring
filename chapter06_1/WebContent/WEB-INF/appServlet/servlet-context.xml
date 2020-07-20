@@ -5,7 +5,9 @@
 	
 <!-- 	<bean id="" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="suffix" value=".jsp"/>
-	</bean> -->
+	</bean> 
+	web.xml 에서 init-param으로 두 개의 context를 줬고 다른 context에서 reoslver를 만들었으니 여기서 또 만들 필요가 없다.
+	-->
 	
-	<bean id="sungJukController" class="com.controller.SungJukController"></bean>
+	<bean id="sungJukController" class="com.controller.SungJukController"/>
 </beans>
