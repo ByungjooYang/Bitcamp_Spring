@@ -15,10 +15,39 @@
 	
 	<context:component-scan base-package="main.controller"/>
 	<context:component-scan base-package="user.controller"/>
+	<context:component-scan base-package="hello.controller"/>
+	
 	
 	<!-- spring web mvc를 하기 위해 설정해야 하는 값들이 자동으로 추가 -->
 	<mvc:annotation-driven/>
 	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
 	
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"> <!-- 위에 viewResolver로 가는 것을 막는다. . -->
+		<property name="contentType" value="text/html;charset=UTF-8"/>
+	</bean>
+	
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"> 
+		<property name="order" value="0" />	      <!-- value값이 우선순위이다. 낮을수록 우선순위가 더 높음. viewResolver가 2개이므로 얘가 먼저 수행하고, 만약 얘가 널값이면 위의 viewResolver로 넘어간다. -->
+	</bean>
+	
+	<!-- <mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven> -->
 	
 </beans>

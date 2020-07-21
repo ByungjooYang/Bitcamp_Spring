@@ -14,4 +14,12 @@
  	<delete id="delete" parameterType="String">
  		delete usertable where id=#{id}
  	</delete>
+ 	
+ 	<select id="getUserList" resultType="userDTO">
+ 		select * from usertable
+ 	</select>
+ 	
+ 	<update id="modify" parameterType="java.util.Map">
+ 		update usertable set id=#{id}, pwd=#{pwd} where name=#{name}
+ 	</update>
  </mapper>

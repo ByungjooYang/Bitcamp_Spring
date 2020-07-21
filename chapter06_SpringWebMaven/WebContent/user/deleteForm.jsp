@@ -45,7 +45,7 @@ $(document).ready(function(){
 				$.ajax({
 					type: 'post',
 					url: '/chapter06_SpringWebMaven/user/delete',
-					data: 'id='+$('#deleteId').val(),
+					data: 'id='+$('#deleteId').val(), //json
 					success: function(data){
 						alert("회원정보를 삭제했습니닷.")
 							
@@ -61,7 +61,6 @@ $(document).ready(function(){
 </script>
 <style type="text/css">
 #deleteDiv{
-	display:none;
 	text-align:center;
 }
 </style>

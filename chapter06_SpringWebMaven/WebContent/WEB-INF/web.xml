@@ -29,6 +29,8 @@
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
   
+  <!-- 요청 처리만 한글로 바꿔준다, controller.java의 경우 (parameter로 넘어오는 경우) 응답처리이므로 한글화가 되지 않느다. -->
+  
   <filter>
   	<filter-name>encodingFilter</filter-name>
   	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -5,12 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+body{
+ text-align:center;
+}
+
+</style>
 </head>
 <body>
-***** 메인화면  *****<br>
-<a href="/chapter06_SpringWebMaven/user/writeForm.do">1. 입력</a><br>
-<a href="">2. 출력</a><br>
-<a href="">3. 수정</a><br>
-<a href="/chapter06_SpringWebMaven/user/deleteForm.do">4. 삭제</a><br>
+<h3>메인화면</h3>
+<a href="/chapter06_SpringWebMaven/user/writeForm">1. 입력</a><br>
+<a href="/chapter06_SpringWebMaven/user/list">2. 출력</a><br>
+<a href="/chapter06_SpringWebMaven/user/modifyForm">3. 수정</a><br>
+<a href="/chapter06_SpringWebMaven/user/deleteForm">4. 삭제</a><br>
+
 </body>
 </html>
