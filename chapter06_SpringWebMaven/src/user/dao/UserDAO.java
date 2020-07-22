@@ -14,7 +14,9 @@ public interface UserDAO {
 
 	public List<UserDTO> getUserList();
 
-	public void modify(String modifyId, String modifyName, String modifyPwd);
+	public void modify(UserDTO userDTO);
+
+	public List<UserDTO> getSearchList(String searchOption, String searchText);
 
 
 }

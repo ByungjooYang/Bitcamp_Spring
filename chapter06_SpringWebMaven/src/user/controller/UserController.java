@@ -129,8 +129,24 @@ public class UserController {
 	}
 	@RequestMapping(value="/user/modify", method=RequestMethod.POST)
 	@ResponseBody
-	public void modify(@RequestParam String id, String name, String pwd) {
-		System.out.println(id + ", " + name + ", " + pwd);
-		userService.modify(id, name, pwd);
+	public void modify(@ModelAttribute UserDTO userDTO) {
+		userService.modify(userDTO);
+	}
+	
+	@RequestMapping(value="/user/getSearchList", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getSearchList(@RequestParam String searchOption, String searchText) {
+		System.out.println(searchOption + ", " + searchText);
+		List<UserDTO> list = userService.getSearchList(searchOption, searchText);
+		
+		for(UserDTO dto : list) {
+			System.out.println(dto.getName());
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		return mav;
 	}
 }

@@ -45,8 +45,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void modify(String id, String name, String pwd) {
-		userDAO.modify(id, name, pwd);
+	public void modify(UserDTO userDTO) {
+		userDAO.modify(userDTO);
+	}
+	@Override
+	public List<UserDTO> getSearchList(String searchOption, String searchText) {
+			
+		return userDAO.getSearchList(searchOption, searchText);
+		
 	}
 	
 	

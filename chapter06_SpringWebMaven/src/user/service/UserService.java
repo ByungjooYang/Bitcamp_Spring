@@ -15,7 +15,9 @@ public interface UserService {
 	public List<UserDTO> getUserList();
 
 	public UserDTO getUser(String id);
+	
+	public void modify(UserDTO userDTO);
 
-	public void modify(String modifyId, String modifyName, String modifyPwd);
+	public List<UserDTO> getSearchList(String searchOption, String searchText);
 
 }

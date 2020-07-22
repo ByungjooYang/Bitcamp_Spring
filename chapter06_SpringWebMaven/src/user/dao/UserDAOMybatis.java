@@ -39,12 +39,19 @@ public class UserDAOMybatis implements UserDAO {
 	}
 
 	@Override
-	public void modify(String id, String name, String pwd) {
+	public void modify(UserDTO userDTO) {
+		System.out.println(userDTO.getId() + userDTO.getName());
+		sqlSession.update("userSQL.modify", userDTO);
+	}
+
+	@Override
+	public List<UserDTO> getSearchList(String searchOption, String searchText) {
 		Map<String, String> map = new HashedMap<String, String>();
-		map.put("id", id);
-		map.put("name", name);
-		map.put("pwd", pwd);
-		sqlSession.update("userSQL.modify", map);
+		map.put("searchOption", searchOption);
+		map.put("searchText", searchText);
+		
+		return sqlSession.selectList("userSQL.getSearchList", map);
+		
 	}
 
 }
