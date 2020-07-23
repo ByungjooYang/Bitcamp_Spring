@@ -60,11 +60,13 @@ $(document).ready(function(){
 		}
 		//$('#table > tbody').empty();
 		//$('#table tr:not(:first)').remove(); => tr의 첫번째 항목만 빼고 제거한다는 것.
+		//$('#table tr:gt(0)').remove();
 		$('#table tbody').remove();
 		$.ajax({
 			type : 'post',
 			url  : '/chapter06_SpringWebMaven/user/getSearchList',
-			data : 'searchOption=' + $('#searchOption').val() + '&searchText=' + $('#searchText').val(),
+			data : 'searchOption=' + $('#searchOption').val() + '&searchText=' + $('#searchText').val(), //JSON.stringify({ #{searchOption}, #{searchText} }), // 이렇게 하면 controller에 @RequestParam이 아니라 @RequestBody를 써주어야 한다.
+			//contentType : 'application/json;charset=UTF-8', 위에 제이슨으로 보내면 이걸 해줘야 한다.
 			dataType : 'json',
 			success : function(data){
 				$.each(data.list, function(index, items){

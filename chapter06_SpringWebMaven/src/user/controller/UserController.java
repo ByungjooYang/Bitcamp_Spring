@@ -136,6 +136,8 @@ public class UserController {
 	@RequestMapping(value="/user/getSearchList", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView getSearchList(@RequestParam String searchOption, String searchText) {
+	//	public ModelAndView getSearchList(@RequestParam Map<String, Object> map)
+	//map.get("searchOption")
 		System.out.println(searchOption + ", " + searchText);
 		List<UserDTO> list = userService.getSearchList(searchOption, searchText);
 		
