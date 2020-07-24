@@ -13,6 +13,8 @@ import member.bean.MemberDTO;
 
 @Configuration
 public class SpringConfiguration {
+	//@Autowired
+	//private ApplicationContext applicationContext;
 	
 	@Bean
 	public BasicDataSource dataSource() {
@@ -35,8 +37,15 @@ public class SpringConfiguration {
 		sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:spring/mybatis-config.xml"));
 
 		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:*/dao/*Mapper.xml"));
+		//sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:*/dao/*Mapper.xml"));
 		return sqlSessionFactoryBean.getObject();
-			
+		
+//		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+//		sqlSessionFactoryBean.setDataSource(dataSource());
+//		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("spring/mybatis-config.xml"));
+//		//sqlSessionFactoryBean.setMapperLocations(new ClassPathResource("member/dao/memberMapper.xml"));
+//		
+//		return sqlSessionFactoryBean.getObject(); 			
 	}
 	
 	@Bean

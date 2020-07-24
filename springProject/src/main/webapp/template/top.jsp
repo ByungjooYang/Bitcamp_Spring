@@ -12,18 +12,18 @@ MVC기반의 미니 프로젝트
 <a href="/miniProject/board/imageboardList.do?pg=1">이미지 보기</a>&emsp;
 
 <c:if test="${sessionScope.memId == null}">
-	<a href="/miniProject/member/writeForm.do">회원가입</a>&emsp;
-	<a href="/miniProject/member/loginForm.do">로그인</a>&emsp;
+	<a href="/springProject/member/writeForm">회원가입</a>&emsp;
+	<a href="/springProject/member/login">로그인</a>&emsp;
 </c:if>
 
 <c:if test="${memId != null}">
-	<a href="../board/boardWriteForm.do">글쓰기</a>&emsp;
+	<a href="/springProject/member/logout">글쓰기</a>&emsp;
 	
 	<c:if test="${memId == 'admin' }">
-		<a href="/miniProject/board/imageboardWriteForm.do">이미지 등록</a>&emsp;
+		<a href="/springProject/member/logout">이미지 등록</a>&emsp;
 	</c:if>
 	
-	<a href="/miniProject/member/modifyForm.do">회원정보수정</a>&emsp;
+	<a href="/springProject/member/logout">회원정보수정</a>&emsp;
 	<a href="/springProject/member/logout">로그아웃</a>&emsp;
 </c:if>
 </div>

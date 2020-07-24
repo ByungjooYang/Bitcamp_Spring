@@ -68,7 +68,7 @@
 			<tr>
 				<td align="center">주소</td>
 				<td><input type="text" name="zipcode" id="zipcode" size=8 align="left" readonly> <!-- disable도 있ㄴ느데 그럼 읽어오지도 못함. -->
-					<input type="button" value="우편번호검색" onclick="checkPost()"><br> 
+					<input type="button" value="우편번호검색" id="checkPostBtn"><br> 
 					<input type="text" name="addr1" id="addr1" size=30 readonly><br>   
 					<input type="text" name="addr2" id="addr2" size=30></td>
 			</tr>

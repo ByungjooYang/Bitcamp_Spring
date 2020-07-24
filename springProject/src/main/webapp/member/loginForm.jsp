@@ -23,7 +23,7 @@
 	<tr>
 		<td colspan="2" align="center">
 		<input type="button" value="로 그 인" id="login" >&emsp; <%-- onclick="checkLoginForm()"--%>
-		<input type="button" value="회원 가입" onclick="location.href='/springProject/member/writeForm'">
+		<input type="button" value="회원 가입" id="writeBtn">
 		</td>
 	</tr>
 

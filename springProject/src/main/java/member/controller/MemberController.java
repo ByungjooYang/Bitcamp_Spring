@@ -32,6 +32,7 @@ public class MemberController {
 			session.setAttribute("memId", memberDTO.getId());
 			session.setAttribute("memName", memberDTO.getName());
 			session.setAttribute("memEmail", memberDTO.getEmail1() + "@" + memberDTO.getEmail2());
+			
 			loginResult = "success";
 			
 		} else {
@@ -53,5 +54,21 @@ public class MemberController {
 		session.invalidate();
 		
 		return new ModelAndView("redirect:/main/index"); //=>main/index 를 바로 부른다.
+	}
+	
+	@RequestMapping(value="writeForm", method=RequestMethod.GET)
+	public String writeForm(Model model) {
+		model.addAttribute("display", "/member/writeForm.jsp");
+		return "/main/index";
+	}
+	
+	@RequestMapping(value="checkId", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkId(@RequestParam String id) {
+		return memberService.checkId(id);
+	}
+	@RequestMapping(value="checkPost", method=RequestMethod.GET)
+	public String checkPost() {
+		return "/member/checkPost";
 	}
 }
