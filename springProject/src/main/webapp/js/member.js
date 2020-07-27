@@ -21,22 +21,49 @@ $(document).ready(function(){
 			$('#writeCheck').text("중복체크를 해주세요.");
 			
 		}else {
-			$.ajax({
-				type : 'post',
-				url  : '/springProject/member/checkId',
-				data : 'id=' + $('#id').val(),
-				dataType : 'text',
-				success : function(data){
-					alert('회원가입 성공');
-					location='/springProject/main/index'				
-				}
-			});
+			$('form[name=writeForm]').submit();
 		}
 	});
 	
-	$('input').on("property change keyup paste input", function(){ // change keyup paste => f12로 들어가서 변경하면 인식을 못한다.
-		$('#writeCheck').empty();
-	});
+});
+
+$('#id').focusout(function(){
+	$('#idDiv').empty();
+	
+	let id = $('#id').val();
+	if(id == ''){
+		$('#idDiv').text('먼저 아이디를 입력하세요')
+        $('#idDiv').css('color', 'magenta')
+        $('#idDiv').css('font-size', '8pt')
+        $('#idDiv').css('font-weight', 'bold')
+        $('#id').focus();		
+	} else{
+	 	$.ajax({
+	 		type: 'post',
+	 		url: '/springProject/member/checkId',
+	 		data: 'id='+id,
+	 		dataType: 'text',
+	 		success : function(data){
+	 			if(data == 'exist'){
+					$('#idDiv').text('사용 불가능')
+					$('#idDiv').css('color','magenta')
+					$('#idDiv').css('font-size','8pt')
+					$('#idDiv').css('font-weight','bold')
+					
+				}else if(data=='non_exist'){
+					$('#check').val($('#id').val());
+					
+					$('#idDiv').text('사용 가능')
+					$('#idDiv').css('color','blue')
+					$('#idDiv').css('font-size','8pt')
+					$('#idDiv').css('font-weight','bold')
+				}
+	 		},
+	 		error: function(e){
+	 			console.log(e);
+	 		}
+	 	});
+	}	
 });
 
 $(document).ready(function(){ //$('checkLoginForm')
@@ -89,8 +116,8 @@ $('#id').focusout(function(){
 					
 				}else if(data=='non_exist'){
 					$('#check').val($('#id').val());
-					$('#writeCheck').text('사용 가능')
-					
+					$('#writeCheck').text('사용 가능');
+					$('#dup').val(id);
 				}
 	 		},
 	 		error: function(e){
@@ -104,42 +131,111 @@ $('#checkPostBtn').click(function(){
 	window.open("/springProject/member/checkPost","","width=500 height=500 scrollbars=yes");
 });
 
-
-function checkPostClose(zipcode, address){
-	opener.document.getElementById("zipcode").value = zipcode; //이걸 써도 되고 이게 더 많이 쓰인다.
-	opener.document.getElementById("addr1").value = address;
-	opener.document.getElementById("addr2").focus();
-	//opener.document.forms[0].zipcode.value = zipcode;
-	//opener.document.forms[0].addr1.value = address;
-	//opener.document.forms[0].addr2.focus();
-	window.close();
-}
-
-
-function checkModifyForm() {
-	//if (document.writeForm.name.value == "") {	//여기서 네임은 name 속성
-	if(document.getElementById("name").value == ""){ // 여기서 네임은 id
-		alert("이름을 입력해주세여.");
-		document.writeForm.name.focus();
-
-	} else if (document.writeForm.pwd.value == "") {
-		alert("비밀번호를 입력해주세여.");
-		document.writeForm.pwd.focus();
-
-	} else if (document.writeForm.repwd.value == "") {
-		alert("재확인 비밀번호를 입력해주세요.");
-		document.writeForm.repwd.focus();
-
-	} else if (document.writeForm.pwd.value != document.writeForm.repwd.value) {
-		alert("비밀번호가 일치하지 않습니다.");
-		document.writeForm.repwd.focus();
+$('#postSearchBtn').click(function(){
+	$('#sidoDiv').empty();
+	$('#sigunguDiv').empty();
+	$('#roadnameDiv').empty();
+	
+	if($('#sido').val()==''){
+		$('#sidoDiv').text('시도 선택');
+		$('#sidoDiv').css('color','red');
+		$('#sidoDiv').css('font-size','8pt');
+		$('#sidoDiv').css('font-weight','bold');
+		
+	}else if($('#sido').val()!='세종' && $('#sigungu').val()==''){
+		$('#sigunguDiv').text('시군구 입력');
+		$('#sigunguDiv').css('color','red');
+		$('#sigunguDiv').css('font-size','8pt');
+		$('#sigunguDiv').css('font-weight','bold');
+		
+	}else if($('#roadname').val()==''){
+		$('#roadnameDiv').text('도로명 입력');
+		$('#roadnameDiv').css('color','red');
+		$('#roadnameDiv').css('font-size','8pt');
+		$('#roadnameDiv').css('font-weight','bold');
 		
 	}else{
-		document.writeForm.submit();
-		
+		$.ajax({
+			type: 'post',
+			url: '/springProject/member/postSearch',
+			data: $('#checkPostForm').serialize(),
+			dataType: 'json',
+			success : function(data){
+				//console.log(JSON.stringify(data));
+				
+				$('#postTable tr:gt(2)').remove();
+				
+				$.each(data.list, function(index, items){
+					let address = items.sido+' '
+								+ items.sigungu+' '
+								+ items.yubmyundong+' '
+								+ items.ri+' '
+								+ items.roadname+' '
+								+ items.buildingname;
+								
+					address	= address.replace(/null/g, '');							
+								
+					$('<tr/>').append($('<td/>',{
+						align: 'center',
+						text: items.zipcode
+					})).append($('<td/>',{
+						colspan: '3'
+						}).append($('<a/>',{
+							href: '#',
+							id: 'addressA',
+							text: address
+						}))
+					).appendTo($('#postTable'));    
+				});//each
+				
+				//a태그를 클릭했을 때
+				$('a').click(function(){
+					$('#zipcode', opener.document).val($(this).parent().prev().text());
+					$('#addr1', opener.document).val($(this).text());
+					$('#addr2', opener.document).focus();
+					window.close();
+				});
+				
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
 	}
+});
+
+
+//회원정보수정
+$('#modifyBtn').click(function(){
+	$('#checkDiv').empty();
 	
-}
+    if($('#name').val() == '') {
+        $('#checkDiv').text('이름을 입력하세요')
+        $('#name').focus();
+        
+    } else if($('#pwd').val() == '') {
+    	$('#checkDiv').text('비밀번호를 입력하세요')
+        $('#pwd').focus();
+        
+    } else if($('#pwd').val() != $('#repwd').val()){
+    	$('#checkDiv').text('비밀번호가 일치하지 않습니다')
+        $('#repwd').focus();
+        
+    }else{
+    	$.ajax({
+    		type: 'post',
+    		url: '/springProject/member/modify',
+    		data: $('#modifyForm').serialize(),
+    		success: function(){
+    			alert('회원 정보 수정 완료');
+    			location.href='/springProject/main/index';
+    		},
+    		error: function(err){
+    			console.log(err);
+    		}
+    	});
+    } 
+ });
 
 function onEnterSubmit(){
 	if(event.keyCode==13){

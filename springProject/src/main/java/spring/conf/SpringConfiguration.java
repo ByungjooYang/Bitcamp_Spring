@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import board.bean.BoardDTO;
+import board.bean.ImageboardDTO;
 import member.bean.MemberDTO;
 
 @Configuration
@@ -61,7 +63,17 @@ public class SpringConfiguration {
 
 	
 	@Bean 
-	public MemberDTO userDTO() { 
+	public MemberDTO memberDTO() { 
 		return new MemberDTO(); 
+	}
+	
+	@Bean
+	public BoardDTO boardDTO() {
+		return new BoardDTO();
+	}
+	
+	@Bean
+	public ImageboardDTO imageboardDTO() {
+		return new ImageboardDTO();
 	}
 }

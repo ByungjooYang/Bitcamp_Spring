@@ -14,7 +14,7 @@
 </tr>
 
 <tr>
-	<td align="center" style="padding: 0px"><jsp:include page="../template/left.jsp"/>
+	<td align="center" style="padding: 0px" width="280"><jsp:include page="../template/left.jsp"/>
 	<td align="center"><jsp:include page="${display }"/></td>
 </tr>
 <%--/main/index.jsp 를하면 display를 못찾기 때문에 서버에러가 떨어진다. 따라서 무조건 index.do로 해야한당! --%>

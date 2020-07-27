@@ -11,7 +11,7 @@
 </head>
 <body>
 <h3 align=center>회원 정보 수정</h3>
-	<form name="modifyForm" method="post" action="/miniProject/member/modify.do">
+	<form name="modifyForm" id="modifyForm" method="post">
 		<table border="5" cellspacing="0" cellpadding="5" align="center">
 			<tr>
 				<td align="center">이름</td>
@@ -21,18 +21,18 @@
 			<tr>
 				<td align="center">아이디</td>
 				<td>
-				<input type="text" name="id" value = "${memberDTO.id }" readonly>
+				<input type="text" name="id" id="id" value = "${memberDTO.id }" readonly>
 				</td>
 			</tr>
 
 			<tr>
 				<td align="center">비밀번호</td>
-				<td><input type="password" name="pwd"></td>
+				<td><input type="password" name="pwd" id="pwd"></td>
 			</tr>
 
 			<tr>
 				<td align="center">재확인</td>
-				<td><input type="password" name="repwd"></td>
+				<td><input type="password" name="repwd" id="repwd"></td>
 			</tr>
 
 			<tr>
@@ -67,7 +67,7 @@
 
 			<tr>
 				<td align="center">주소</td>
-				<td><input type="text" name="zipcode" id="zipcode" size=8 align="left" value = "${memberDTO.zipcode }" readonly> <!-- disable도 있ㄴ느데 그럼 읽어오지도 못함. -->
+				<td><input type="text" name="zipcode" id="zipcode" size="8" align="left" value = "${memberDTO.zipcode }" readonly> <!-- disable도 있ㄴ느데 그럼 읽어오지도 못함. -->
 					<input type="button" value="우편번호검색" onclick="checkPost()" ><br> 
 					<input type="text" name="addr1" id="addr1" size=30 value = "${memberDTO.addr1 }" readonly><br>   
 					<input type="text" name="addr2" id="addr2" size=30 value = "${memberDTO.addr2 }"></td>
@@ -75,14 +75,16 @@
 			
 			<tr>
 				<td colspan="2" align="center">
-				<input type="submit" value="회원정보수정">&emsp; 
+				<input type="button" value="회원정보수정" id="modifyBtn">&emsp; 
 				<input type="reset" value="다시입력"></td>
 			</tr>
 
 		</table>
+		<div id="checkDiv" style="color:red;font-size:8pt;fint-weight:bold;"></div>
 	</form>
 </body>
-<script src="../js/member.js"></script>
+<script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../js/member.js"></script>
 <script>
 window.onload=function(){
 	document.modifyForm.gender['${memberDTO.gender}'].checked = true;

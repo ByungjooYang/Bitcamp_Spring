@@ -10,7 +10,7 @@
 로그인 실패!
 <br><br>
 
-<input type=button value="로그인" onclick="location.href='/miniProject/member/loginForm.do'"> 
-<input type=button value="회원가입" onclick="location.href='/miniProject/member/writeForm.do'"> 
+<input type=button value="로그인" onclick="location.href='/springProject/main/index'"> 
+<input type=button value="회원가입" onclick="location.href='/springProject/member/writeForm'"> 
 </body>
 </html>

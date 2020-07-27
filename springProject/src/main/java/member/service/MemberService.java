@@ -14,4 +14,10 @@ public interface MemberService {
 
 	public List<ZipcodeDTO> postSearch(Map<String, String> map);
 
+	public MemberDTO getMember(String id);
+
+	public void modify(MemberDTO memberDTO);
+
+	public void write(MemberDTO memberDTO);
+
 }

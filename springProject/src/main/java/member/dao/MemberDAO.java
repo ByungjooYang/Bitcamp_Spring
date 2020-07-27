@@ -14,4 +14,8 @@ public interface MemberDAO {
 
 	public List<ZipcodeDTO> postSearch(Map<String, String> map);
 
+	public void write(MemberDTO memberDTO);
+
+	public void modify(MemberDTO memberDTO);
+
 }

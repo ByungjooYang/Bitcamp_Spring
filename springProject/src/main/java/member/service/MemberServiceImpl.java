@@ -38,4 +38,19 @@ public class MemberServiceImpl implements MemberService { //웹하고 상관없�
 		return memberDAO.postSearch(map);
 	}
 
+	@Override
+	public void write(MemberDTO memberDTO) {
+		memberDAO.write(memberDTO);
+	}
+
+	@Override
+	public MemberDTO getMember(String id) {
+		return memberDAO.checkId(id);
+	}
+
+	@Override
+	public void modify(MemberDTO memberDTO) {
+		memberDAO.modify(memberDTO);
+	}
+
 }

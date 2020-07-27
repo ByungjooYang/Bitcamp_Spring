@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class ZipcodeDTO {
-	private String zipcode, sido, sigungu, yubmyundong, ri, roadName, buildingname;
+	private String zipcode, sido, sigungu, yubmyundong, ri, roadname, buildingname;
 }

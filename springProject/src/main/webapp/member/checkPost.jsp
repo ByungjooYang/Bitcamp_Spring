@@ -2,20 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>우편번호 찾기</title>
-</head>
-<body>
-<body>
-<form method=post>
-<table border="1" width="100%" cellspacing="0" cellpadding="3">
+<style type="text/css">
+th {
+	font-size:8pt;
+	background-color: #cccccc
+}  
+td {
+	font-size:8pt
+}
+#addressA:link{color: black; text-decoration: none;}
+#addressA:visited{color: black; text-decoration: none;}
+#addressA:hover{color: green; text-decoration: none; font-weight: bold;}
+#addressA:active{color: black; text-decoration: none;}  
+</style>
+<form id="checkPostForm">
+<table border="1" width="100%" cellspacing="0" cellpadding="3" id="postTable">
 	<tr>
 		<th>시도</th>
 		<td>
-		<select name="sido" style="width:100px;">
+		<select name="sido" id="sido" style="width:100px;">
 			<option value="">시도선택</option>
 			<option value="서울">서울</option>
 			<option value="인천">인천</option>
@@ -38,14 +43,17 @@
 		<div id="sidoDiv"></div>
 		</td>
 		<th>시.군.구</th>
-		<td><input type="text" name="sigungu" size="30"></td>
+		<td>
+		<input type="text" name="sigungu" id="sigungu" size="30">
+		<div id="sigunguDiv"></div>
+		</td>
 		
 	</tr>
 	
 	<tr>
 		<th>도로명</th>
 		<td colspan="3">
-		<input type="text" name="roadname" size="35">
+		<input type="text" name="roadname" id="roadname" size="35">
 		<input type="button" value="검색" id="postSearchBtn">
 		<div id="roadnameDiv"></div>
 		</td>
@@ -55,26 +63,8 @@
 		<th>우편번호</th>
 		<th colspan="3" align="center" >주소</th>
 	</tr>
-	<c:if test="${list != null }">
-	<c:forEach var="zipcodeDTO" items="${list}">
-		<c:set var="address">
-			${zipcodeDTO.sido 
-			} ${zipcodeDTO.sigungu 
-			} ${zipcodeDTO.yubmyundong 
-			} ${zipcodeDTO.ri 
-			} ${zipcodeDTO.roadName 
-			} ${zipcodeDTO.buildingname }
-		</c:set>	
-		<tr>
-			<td align = center>${zipcodeDTO.zipcode }</td>
-			<td colspan = 3>
-			<a id = "addressA" href="#" onclick="checkPostClose('${zipcodeDTO.zipcode }', '${address }')">${address }</a>
-			</td>
-		</tr>
-	</c:forEach>
-	</c:if>
 </table>
 </form>
-</body>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="../js/member.js"></script>
-</html>

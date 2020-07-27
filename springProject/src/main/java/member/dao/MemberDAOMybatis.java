@@ -35,4 +35,16 @@ public class MemberDAOMybatis implements MemberDAO {
 	public List<ZipcodeDTO> postSearch(Map<String, String> map) {
 		return sqlSession.selectList("memberSQL.postSearch", map);
 	}
+	
+	@Override
+	public void write(MemberDTO memberDTO) {
+		System.out.println(memberDTO.getName());
+		sqlSession.insert("memberSQL.write", memberDTO);
+	}
+
+	@Override
+	public void modify(MemberDTO memberDTO) {
+		sqlSession.update("memberSQL.modify", memberDTO);
+	}
+
 }

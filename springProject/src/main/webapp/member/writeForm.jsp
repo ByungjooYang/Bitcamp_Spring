@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3 align="center">회원가입</h3>
-	<form name="writeForm" method="post" action="/miniProject/member/write.do">
+	<form name="writeForm" method="post" action="/springProject/member/write">
 		<table border="5" cellspacing="0" cellpadding="5" align="center">
 			<tr>
 				<td align="center">이름</td>
@@ -31,7 +31,7 @@
 
 			<tr>
 				<td align="center">재확인</td>
-				<td><input type="password" name="pwd" id="repwd"></td>
+				<td><input type="password" name="repwd" id="repwd"></td>
 			</tr>
 
 			<tr>
