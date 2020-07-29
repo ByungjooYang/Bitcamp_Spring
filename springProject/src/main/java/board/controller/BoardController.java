@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import board.bean.BoardDTO;
+import board.bean.BoardPaging;
 import board.service.BoardService;
 
 @Controller
@@ -57,13 +58,32 @@ public class BoardController {
 	@ResponseBody
 	public ModelAndView getBoardList(@RequestParam String pg) {
 		List<BoardDTO> list = boardService.getBoardList(pg);
+		BoardPaging boardPaging = boardService.boardPaging(pg);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
+		mav.addObject("boardPaging", boardPaging);
 		mav.setViewName("jsonView");
 		
 		return mav;
 	}
 	
+	@RequestMapping(value="getBoardSearch", method=RequestMethod.POST)
+	public ModelAndView getBoardSearch(@RequestParam Map<String,String> map) {
+		List<BoardDTO> list = boardService.getBoardSearch(map);
+		System.out.println(list.size());
+		
+		//페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", map.get("pg"));
+		mav.addObject("list", list);
+		mav.addObject("searchOption", map.get("searchOption"));
+		mav.addObject("keyword", map.get("keyword"));
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 }

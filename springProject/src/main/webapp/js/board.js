@@ -24,3 +24,5 @@ $('#boardWriteBtn').click(function(){
 		});
 	}
 });
+
+

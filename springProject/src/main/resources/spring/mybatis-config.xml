@@ -7,6 +7,5 @@
  		<typeAlias type="member.bean.MemberDTO" alias="memberDTO"/>
  		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcodeDTO"/>
  		<typeAlias type="board.bean.BoardDTO" alias="boardDTO"/>
- 		<typeAlias type="board.bean.ImageboardDTO" alias="image"/>
  	</typeAliases>
  </configuration>

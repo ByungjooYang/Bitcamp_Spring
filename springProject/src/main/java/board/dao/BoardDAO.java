@@ -9,6 +9,13 @@ public interface BoardDAO {
 
 	public void boardWrite(Map<String, String> map);
 
-	public List<BoardDTO> getBoardList(String pg);
+	public List<BoardDTO> getBoardList(Map<String, Integer> map);
+
+	public int getTotalA();
+
+	public List<BoardDTO> getBoardSearch(Map<String, String> map);
+
+	public int getBoardSearchTotalA(Map<String, String> map);
+
 
 }

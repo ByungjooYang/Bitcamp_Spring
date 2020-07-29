@@ -16,7 +16,7 @@
   	
   	<select id="getBoardList" parameterType="java.util.Map" resultType="boardDTO">
   		<![CDATA[
-  		select * from (select rownum rn, tt.*from(select * from board order by ref desc, step asc)tt) where rn>=#{pg * 5 - 4} and rn<=#{pg * 5}
+  		select * from (select rownum rn, tt.*from(select * from board order by ref desc, step asc)tt) where rn>=#{startNum} and rn<=#{endNum}
   		]]>
   	</select>
   	<!-- &gt; >    &lt; <     &ge; >=     &le;  <= -->
@@ -25,92 +25,20 @@
   		select count(*) from board
   	</select>
   	
-  	<select id="getDTO" parameterType="int" resultType="boardDTO">
-  		select * from board where seq=#{seq}
-  	</select>
-  	
-  	<update id="boardModify" parameterType="java.util.Map">
-  		update board set subject=#{subject}, content=#{content}, logtime=sysdate where seq=#{seq}
-  	</update>
-  	
-  	<update id="addHit" parameterType="int">
-  		update board set hit=hit+1 where seq=#{seq}
-  	</update>
-  	
-  	<select id="search" parameterType="java.util.Map" resultType="boardDTO">
-  		<![CDATA[
-		select * from (select rownum rn, tt.*from
-		(select seq, id, subject, name, email, content, ref, lev, step, pseq, reply, logtime, hit 
-		from board where ${column} like '%'||#{keyword}||'%' order by ref desc)tt) 
-		where rn>=#{startNum} and rn<=#{endNum}  	
+  	<!-- 검색 -->
+	<select id="getBoardSearch" parameterType="java.util.Map" resultType="boardDTO">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from board where ${searchOption} like '%'||#{keyword}||'%' 
+							 order by ref desc, step asc)tt
+		)where rn>=#{startNum} and rn<=#{endNum} 
 		]]>
-  	</select>
-  	
-  	<select id="getSearchA" parameterType="java.util.Map" resultType="int">
-  		select count(*) from board where ${column} like '%'||#{keyword}||'%'
-  	</select>
-  	
-  	<!-- 답글 -->
-  	<update id="writeReply1" parameterType="boardDTO">
-  	<![CDATA[
-  		update board set step=step+1 where ref=#{ref} and step>#{step}
-  	]]>
-  	</update>
-  	
-  	<insert id="writeReply2" parameterType="java.util.Map">
-  		insert into board values(seq_board.nextval, 
-  								 #{id}, 
-  								 #{name}, 
-  								 #{email}, 
-  								 #{subject}, 
-  								 #{content}, 
-  								 #{ref}, 
-  								 #{lev}, 
-  								 #{step}, 
-  								 #{pseq}, 
-  								 0, 
-  								 0, 
-  								 sysdate )
-  	</insert>
-  	
-  	<update id="writeReply3" parameterType="int">
-  		update board set reply=reply+1 where seq=#{seq}
-  	</update>
-  	
-  	<!-- 삭제 -->
-  	
-  	<delete id="boardDelete" parameterType="int">
-  		begin
-  			update board set reply=reply-1 where seq=(select pseq from board where seq=#{seq});
-  			
-  			update board set subject ='[원글이 삭제된 답글]'|| subject where pseq=#{seq};
-  			
-  			delete board where seq=#{seq};
-  		end;	
-  	</delete>
-  	
-  	<!-- 이미지 -->
-  	
-  	<insert id="imageboardWrite" parameterType="image">
-	  	insert into imageboard values(seq_imageboard.nextval, #{imageId}, #{imageName}, #{imagePrice}, #{imageQty}, #{imageContent}, #{image1}, sysdate)
-  	</insert>
-  	
-  	<select id="getImageList" parameterType="int" resultType="image">
-  		<![CDATA[
-		select * from (select rownum rn, tt.*from(select * from imageboard order by seq desc)tt) where rn>=#{startNum} and rn<=#{endNum}
-		]]>
-  	</select>
-  	
-  	<select id="getImageTotalA" resultType="int">
-  		select count(*) from imageboard
-  	</select>
-  	
-  	<delete id="imageboardDelete" parameterType="String">
-  		delete imageboard where seq in (${seq})
-  	</delete>
-  	
-  	<select id="getImageDTO" parameterType="int" resultType="image">
-  		select * from imageboard where seq=#{seq}
-  	</select>
+	</select>
+	
+	<!-- 검색 총글수 -->
+	<select id="getBoardSearchTotalA" resultType="int">
+		select count(*) from board where ${searchOption} like '%'||#{keyword}||'%'
+	</select>
   	
  </mapper>
